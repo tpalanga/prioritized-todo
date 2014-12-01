@@ -1,9 +1,17 @@
 package models
 
+import play.api.libs.json.{Writes, Reads, Json, Format}
+import utils.EnumUtils
+
 /**
  * Created by tudor on 01/12/14.
  */
-sealed trait TodoCategory { def name: String }
-case object A extends TodoCategory { val name = "A" }
-case object B extends TodoCategory { val name = "B" }
-case object C extends TodoCategory { val name = "C" }
+object TodoCategory extends Enumeration {
+  type TodoCategory = Value
+  val A = Value("A")
+  val B = Value("B")
+  val C = Value("C")
+
+  implicit val enumReads: Reads[TodoCategory] = EnumUtils.enumReads(TodoCategory)
+  implicit def enumWrites: Writes[TodoCategory] = EnumUtils.enumWrites
+}
