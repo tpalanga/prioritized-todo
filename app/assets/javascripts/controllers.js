@@ -2,7 +2,7 @@
     'use strict';
 
     /** Controllers */
-    angular.module('prioTodo.controllers', ['ngResource']).
+    angular.module('prioTodo.controllers').
         controller('TodoCtrl', function ($scope, $http, $resource) {
 
             $scope.getList = function() {
@@ -10,11 +10,6 @@
                     .success(function(data) {
                         $scope.todoItems = data;
                     });
-            };
-
-            $scope.getListResource = function() {
-                var TodoItems = $resource('/list');
-                $scope.todoItems = TodoItems.query();
             };
 
             $scope.getList();
