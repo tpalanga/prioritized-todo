@@ -2,7 +2,7 @@
     'use strict';
 
     /** Controllers */
-    angular.module('prioTodo.controllers').
+    angular.module('prioTodo.controllers', []).
         controller('TodoCtrl', function ($scope, $http) {
 
             $scope.getList = function() {
