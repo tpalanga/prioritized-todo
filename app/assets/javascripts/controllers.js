@@ -3,7 +3,7 @@
 
     /** Controllers */
     angular.module('prioTodo.controllers').
-        controller('TodoCtrl', function ($scope, $http, $resource) {
+        controller('TodoCtrl', function ($scope, $http) {
 
             $scope.getList = function() {
                 $http({method: 'GET', url: '/list'})
