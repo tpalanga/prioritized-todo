@@ -20,6 +20,7 @@
     </head>
     <body ng-app="prioTodo">
         <div ng-controller="TodoCtrl">
+            <h1>Prioritized Todo</h1>
             <div id="todoList">
                 <div class="item" ng-repeat="item in todoItems">{{item.category + item.priority + ' - ' + item.title}}</div>
             </div>
