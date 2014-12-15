@@ -7,8 +7,24 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 scalaVersion := "2.11.4"
 
 libraryDependencies ++= Seq(
+  "org.seleniumhq.selenium" % "selenium-java" % "2.44.0" % "test",
   jdbc,
   anorm,
   cache,
   ws
 )
+
+Seq(jasmineSettings : _*)
+
+appJsDir <+= baseDirectory { src => src / "app" / "assets" / "javascripts"}
+
+appJsLibDir <+= baseDirectory { src => src / "public" / "javascripts" / "libs" }
+
+jasmineTestDir <+= baseDirectory { src => src / "test" / "js" }
+
+jasmineConfFile <+= baseDirectory { src => src / "test" / "js" / "test.dependencies.js" }
+
+jasmineEdition := 1
+
+(test in Test) <<= (test in Test) dependsOn (jasmine)
+
