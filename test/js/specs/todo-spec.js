@@ -17,7 +17,7 @@ describe("Todo controllers", function() {
         var mockData = [
             {title: 'test item 1', category: {name: 'A'}, priority: 1},
             {title: 'test item 2', category: {name: 'A'}, priority: 2}
-        ]
+        ];
 
         beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
             $httpBackend = _$httpBackend_;
