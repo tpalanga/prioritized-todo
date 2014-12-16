@@ -30,8 +30,8 @@ jasmineEdition := 1
 (test in Test) <<= (test in Test) dependsOn (jasmine)
 
 
-ScoverageSbtPlugin.ScoverageKeys.coverageMinimum := 80
+ScoverageSbtPlugin.ScoverageKeys.coverageMinimum := 100
 
 ScoverageSbtPlugin.ScoverageKeys.coverageFailOnMinimum := true
 
-ScoverageSbtPlugin.ScoverageKeys.coverageExcludedFiles := ".*(R|r)everse.*"
+ScoverageSbtPlugin.ScoverageKeys.coverageExcludedFiles := ".*((R|r)everse|routing|template).*"
