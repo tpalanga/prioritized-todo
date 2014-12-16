@@ -1,14 +1,15 @@
 import controllers.Todo
-import models.{TodoItemsService, TodoItems, TodoItem, TodoCategory}
-import org.specs2.runner._
+import models.TodoCategory._
+import models.{TodoCategory, TodoItem, TodoItemsService}
 import org.junit.runner._
-import play.api.libs.json._
+import org.mockito.Mockito._
 import org.specs2.mock.Mockito
 import org.specs2.mutable.Specification
-import org.mockito.Mockito._
-import play.api.test._
+import org.specs2.runner._
+import play.api.libs.json._
 import play.api.test.Helpers._
-import TodoCategory._
+import play.api.test._
+
 import scala.concurrent.Future
 
 /**
@@ -49,30 +50,34 @@ class ApplicationSpec extends Specification with Mockito {
       when(mockTodoItemsObject.all).thenReturn(Future.successful(testItems))
       val todoController = new Todo(mockTodoItemsObject)
 
-      val result = todoController.list(FakeRequest())
+      val result = todoController.list(FakeRequest(GET, "/api/todos"))
 
       status(result) must equalTo(OK)
       contentType(result) must beSome.which(_ == "application/json")
       contentAsJson(result) must be_==(Json.toJson(testItems))
     }
 
-    "read Json Enums" in {
-        val json = """{"title":"Reply important email","category":"A","priority":1}"""
-        val todoItem = Json.parse(json).as[TodoItem]
-        todoItem.category must be(A)
+  }
+
+  "EnumUtils" should {
+    "read Json" in {
+      val json = """{"title":"Reply important email","category":"A","priority":1}"""
+      val todoItem = Json.parse(json).as[TodoItem]
+      todoItem.category must be(A)
     }
 
-    "read Json Enums wrong value" in {
+    "read Json - wrong value" in {
       val json = """"N""""
       val jsResult = TodoCategory.enumReads.reads(Json.parse(json))
       jsResult must beAnInstanceOf[JsError]
     }
 
-    "read Json Enums bad json type" in {
+    "read Json - bad json type" in {
       val json = """true"""
       val jsResult = TodoCategory.enumReads.reads(Json.parse(json))
       jsResult must beAnInstanceOf[JsError]
     }
 
   }
+
 }
