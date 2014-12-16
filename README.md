@@ -9,7 +9,7 @@ A simple app for managing a prioritized todo list. The application comes as a he
 tests and code coverage
 =======================
 
-The project Scala code has 100% test coverage. The JavaScript code is tested but not (yet) checked for coverage.
+The project has 100% test coverage for the Scala code. The JavaScript code is tested but not (yet) checked for coverage.
 
 In order to run all the tests (JavaScript, unit, integration) and report the coverage, run the following command in the 
 project root:
