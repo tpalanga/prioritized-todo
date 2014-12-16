@@ -1,6 +1,6 @@
 package models
 
-import play.api.libs.json.{Writes, Reads, Json, Format}
+import play.api.libs.json.{Writes, Reads}
 import utils.EnumUtils
 
 /**
@@ -12,6 +12,6 @@ object TodoCategory extends Enumeration {
   val B = Value("B")
   val C = Value("C")
 
-  implicit val enumReads: Reads[TodoCategory] = EnumUtils.enumReads(TodoCategory)
+  implicit def enumReads: Reads[TodoCategory] = EnumUtils.enumReads(TodoCategory)
   implicit def enumWrites: Writes[TodoCategory] = EnumUtils.enumWrites
 }

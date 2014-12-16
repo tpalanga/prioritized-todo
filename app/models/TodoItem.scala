@@ -2,7 +2,7 @@ package models
 
 import models.TodoCategory._
 
-import play.api.libs.json.Json
+import play.api.libs.json.{JsValue, Json}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -18,9 +18,14 @@ object TodoItem {
 
   implicit def orderingByPriority[T <: TodoItem]: Ordering[T] =
     Ordering.by(x => (x.category.toString, x.priority, x.title))
+
 }
 
-object TodoItems {
+trait TodoItemsService {
+  def all: Future[List[TodoItem]]
+}
+
+object TodoItems extends TodoItemsService {
 
   val getGroceries = TodoItem("Get groceries", B, 1)
   val finishProject = TodoItem("Finish project", A, 2)

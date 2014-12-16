@@ -8,6 +8,7 @@ scalaVersion := "2.11.4"
 
 libraryDependencies ++= Seq(
   "org.seleniumhq.selenium" % "selenium-java" % "2.44.0" % "test",
+  "org.mockito" % "mockito-core" % "1.10.8" % "test",
   jdbc,
   anorm,
   cache,
@@ -28,3 +29,9 @@ jasmineEdition := 1
 
 (test in Test) <<= (test in Test) dependsOn (jasmine)
 
+
+ScoverageSbtPlugin.ScoverageKeys.coverageMinimum := 80
+
+ScoverageSbtPlugin.ScoverageKeys.coverageFailOnMinimum := true
+
+ScoverageSbtPlugin.ScoverageKeys.coverageExcludedFiles := ".*(R|r)everse.*"

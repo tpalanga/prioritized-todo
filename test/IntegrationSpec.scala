@@ -1,6 +1,9 @@
+import models.TodoCategory._
+import models.{TodoItem, TodoItems}
 import org.specs2.mutable._
 import org.specs2.runner._
 import org.junit.runner._
+import play.api.libs.json.Json
 
 import play.api.test._
 import play.api.test.Helpers._
@@ -19,6 +22,15 @@ class IntegrationSpec extends Specification {
       browser.goTo("http://localhost:" + port)
 
       browser.pageSource must contain("Prioritized Todo")
+    }
+
+    "load todo list" in new WithBrowser {
+
+      val getGroceries = TodoItem("Get groceries", B, 1)
+
+      browser.goTo("http://localhost:" + port + "/api/todos")
+
+      browser.pageSource must contain(Json.toJson(getGroceries).toString())
     }
   }
 }
